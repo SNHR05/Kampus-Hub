@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Hanifia - Papan Pengumuman</title>
+<style>
+body {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #222;
+}
+
+
+.header {
+	background-color: #1a3d7c;
+	color: white;
+	padding: 20px;
+}
+
+.header h1 {
+	margin: 0;
+	font-size: 22px;
+}
+
+.header p {
+	margin: 5px 0 0 0;
+	font-size: 14px;
+}
+
+
+.nav {
+	background-color: #f0f0f0;
+	padding: 10px 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.nav a {
+	margin-right: 20px;
+	text-decoration: none;
+	color: #1a3d7c;
+	font-weight: bold;
+}
+
+.nav a:hover {
+	text-decoration: underline;
+}
+
+
+.main {
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.main h2 {
+	color: #1a3d7c;
+}
+
+
+.form-cari {
+	margin-bottom: 20px;
+}
+
+.form-cari input[type="text"] {
+	padding: 6px;
+	width: 250px;
+	border: 1px solid #999;
+}
+
+.form-cari button {
+	padding: 6px 15px;
+	background-color: #e6e6e6;
+	border: 1px solid #999;
+	cursor: pointer;
+}
+
+.form-cari button:hover {
+	background-color: #d5d5d5;
+}
+
+
+.pengumuman {
+	border: 1px solid #ccc;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+.pengumuman h3 {
+	margin: 0 0 5px 0;
+}
+
+.pengumuman .meta {
+	color: #777;
+	font-size: 13px;
+}
+
+
+.footer {
+	border-top: 1px solid #ccc;
+	padding: 15px 20px;
+	font-size: 13px;
+	color: #555;
+	margin-top: 30px;
+}
+</style>
+</head>
+<body>
+
+
+<div class="header">
+	<h1>GLI</h1>
+	<p>GLI X KARTAR</p>
+</div>
+
+
+<div class="nav">
+	<a href="#">Pengumuman</a>
+	<a href="#">Tentang</a>
+</div>
+
+
+<div class="main">
+
+	<h2>Pengumuman terbaru</h2>
+
+	
+	<form class="form-cari">
+		<label for="cariJudul">Cari judul</label><br>
+		<input type="text" id="cariJudul" name="cariJudul">
+		<button type="submit">Cari</button>
+	</form>
+
+	
+	<div class="pengumuman">
+		<h3>Kategori lomba 17 Agustus</h3>
+		<p>Setiap warga RT 05 wajib mengikuti perlombaan yang diadakan</p>
+		<div class="meta">12 September 2026 &middot; akademik</div>
+	</div>
+
+	<div class="pengumuman">
+		<h3>Nama nama lomba GLI</h3>
+		<p>Mlaku Timik Timik, Mancing Kerupuk, Kipas Ikan, Joget Balon</p>
+		<div class="meta">15 September 2026 &middot; beasiswa</div>
+	</div>
+
+	<div class="pengumuman">
+		<h3>Dokumentasi Lomba GLI</h3>
+		<p>Informasi foto dan video lomba bisa diakses disini</p>
+		<div class="meta">19 Oktober 2026 &middot; fasilitas</div>
+	</div>
+
+	<h2>Tentang aplikasi ini</h2>
+	<p>GLI adalah papan pengumuman sederhana yang dibuat untuk mahasiswa KKN 05 Desa Golan, agar warga RT 05 mudah mendapatkan informasi lomba 17 Agustus terbaru.</p>
+
+</div>
+
+
+<div class="footer">
+	Pemrograman Web &middot; 2026 &middot; Siti Nurhanifia Rohma / NIM20232210155
+</div>
+
+</body>
+</html>
