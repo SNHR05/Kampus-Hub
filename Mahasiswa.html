@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KampusHub - Data Mahasiswa</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+	<h1>KampusHub</h1>
+	<p>Cari nama mahasiswa secara langsung</p>
+</div>
+
+<div class="nav">
+	<a href="index.html">Pengumuman</a>
+	<a href="mahasiswa.html" class="aktif">Mahasiswa</a>
+	<a href="index.html#tentang">Tentang</a>
+</div>
+
+<div class="main">
+
+	<h2 style="color:#1a3d7c;">Data Mahasiswa</h2>
+
+	<form class="form-cari" id="formCari">
+		<label for="cariNama">Cari nama</label><br>
+		<input type="text" id="cariNama" autocomplete="off" placeholder="Ketik nama mahasiswa...">
+		<button type="submit">Cari</button>
+	</form>
+
+	<div class="info-hasil" id="infoHasil"></div>
+
+	<div id="daftarMahasiswa"></div>
+
+	<p class="tidak-ada" id="tidakAda">Tidak ada mahasiswa yang cocok dengan pencarian.</p>
+
+	<div class="detail" id="detail">
+		<h2 id="detailNama"></h2>
+		<table>
+			<tr>
+				<td>NIM</td>
+				<td id="detailNim"></td>
+			</tr>
+			<tr>
+				<td>Jurusan</td>
+				<td id="detailJurusan"></td>
+			</tr>
+		</table>
+
+		<h3 class="nilai-title">Nilai Mata Kuliah</h3>
+		<table class="nilai-table">
+			<thead>
+				<tr>
+					<th>Mata Kuliah</th>
+					<th>Nilai</th>
+				</tr>
+			</thead>
+			<tbody id="detailNilaiBody"></tbody>
+		</table>
+	</div>
+
+</div>
+
+<div class="footer">
+	Pemrograman Web &middot; 2026 &middot; Nama Mahasiswa / NIM12345
+</div>
+
+<script>
+	// Data mahasiswa
+	let mahasiswa = [
+		{
+			nama: "Rizki",
+			nim: "123456789",
+			jurusan: "Teknik Informatika",
+			nilai: [
+				{ mataKuliah: "Algoritma dan Pemrograman", nilai: "A" },
+				{ mataKuliah: "Basis Data", nilai: "B+" },
+				{ mataKuliah: "Jaringan Komputer", nilai: "A-" }
+			]
+		},
+		{
+			nama: "Dina",
+			nim: "987654321",
+			jurusan: "Sistem Informasi",
+			nilai: [
+				{ mataKuliah: "Analisis Sistem Informasi", nilai: "A" },
+				{ mataKuliah: "Manajemen Proyek TI", nilai: "A-" },
+				{ mataKuliah: "Basis Data", nilai: "B+" }
+			]
+		},
+		{
+			nama: "Budi",
+			nim: "456789123",
+			jurusan: "Teknik Komputer",
+			nilai: [
+				{ mataKuliah: "Sistem Digital", nilai: "B" },
+				{ mataKuliah: "Arsitektur Komputer", nilai: "B+" },
+				{ mataKuliah: "Mikroprosesor", nilai: "A-" }
+			]
+		},
+	];
+
+	const formCari = document.getElementById("formCari");
+	const inputCari = document.getElementById("cariNama");
+	const infoHasil = document.getElementById("infoHasil");
+	const tidakAda = document.getElementById("tidakAda");
+	const daftarMahasiswa = document.getElementById("daftarMahasiswa");
+
+	const detail = document.getElementById("detail");
+	const detailNama = document.getElementById("detailNama");
+	const detailNim = document.getElementById("detailNim");
+	const detailJurusan = document.getElementById("detailJurusan");
+	const detailNilaiBody = document.getElementById("detailNilaiBody");
+
+	let nimAktif = null;
+
+	function escapeRegex(teks) {
+		return teks.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	}
+
+	function highlight(teks, kataKunci) {
+		if (!kataKunci) return teks;
+		const regex = new RegExp(`(${escapeRegex(kataKunci)})`, "ig");
+		return teks.replace(regex, "<mark>$1</mark>");
+	}
+
+	function tampilkanDetail(mhs) {
+		nimAktif = mhs.nim;
+		detailNama.textContent = mhs.nama;
+		detailNim.textContent = mhs.nim;
+		detailJurusan.textContent = mhs.jurusan;
+
+		detailNilaiBody.innerHTML = "";
+		(mhs.nilai || []).forEach((mk) => {
+			const tr = document.createElement("tr");
+			tr.innerHTML = `<td>${mk.mataKuliah}</td><td>${mk.nilai}</td>`;
+			detailNilaiBody.appendChild(tr);
+		});
+
+		detail.style.display = "block";
+		renderDaftar(inputCari.value.trim());
+	}
+
+	function renderDaftar(kataKunci) {
+		const kataKunciLower = kataKunci.toLowerCase();
+		const hasil = mahasiswa.filter((mhs) =>
+			mhs.nama.toLowerCase().includes(kataKunciLower)
+		);
+
+		daftarMahasiswa.innerHTML = "";
+
+		hasil.forEach((mhs) => {
+			const div = document.createElement("div");
+			div.className = "mahasiswa" + (mhs.nim === nimAktif ? " aktif" : "");
+			div.innerHTML = `
+				<h3>${highlight(mhs.nama, kataKunci)}</h3>
+				<div class="jurusan">${mhs.jurusan} &middot; NIM ${mhs.nim}</div>
+			`;
+			div.addEventListener("click", () => tampilkanDetail(mhs));
+			daftarMahasiswa.appendChild(div);
+		});
+
+		tidakAda.style.display = hasil.length === 0 ? "block" : "none";
+
+		infoHasil.textContent =
+			kataKunci === ""
+				? `Menampilkan semua mahasiswa (${hasil.length})`
+				: `Ditemukan ${hasil.length} mahasiswa untuk "${kataKunci}"`;
+	}
+
+	// Live search: filter langsung saat mengetik
+	inputCari.addEventListener("input", () => {
+		renderDaftar(inputCari.value.trim());
+	});
+
+	// Tombol "Cari" tetap berfungsi tanpa reload halaman
+	formCari.addEventListener("submit", (e) => {
+		e.preventDefault();
+		renderDaftar(inputCari.value.trim());
+	});
+
+	// Tampilan awal
+	renderDaftar("");
+</script>
+
+</body>
+</html>

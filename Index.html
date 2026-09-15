@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KampusHub - Papan Pengumuman</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div class="header">
+	<h1>KampusHub</h1>
+	<p>Papan pengumuman Universitas Wahidiyah Kota kediri</p>
+</div>
+
+
+<div class="nav">
+	<a href="index.html" class="aktif">Pengumuman</a>
+	<a href="mahasiswa.html">Mahasiswa</a>
+	<a href="#tentang">Tentang</a>
+</div>
+
+
+<div class="main">
+
+	<h2>Pengumuman terbaru</h2>
+
+	<!-- form pencarian -->
+	<form class="form-cari" id="formCari">
+		<label for="cariJudul">Cari judul</label><br>
+		<input type="text" id="cariJudul" name="cariJudul" autocomplete="off" placeholder="Ketik judul pengumuman...">
+		<button type="submit">Cari</button>
+	</form>
+
+	<div class="info-hasil" id="infoHasil"></div>
+
+	<div id="daftarPengumuman">
+		<div class="pengumuman" data-judul="Pendaftaran KRS Semester Genap Dibuka">
+			<h3>Pendaftaran KRS Semester Genap Dibuka</h3>
+			<p>Mahasiswa wajib mengisi KRS sebelum batas waktu yang ditentukan.</p>
+			<div class="meta">12 September 2026 &middot; akademik</div>
+		</div>
+
+		<div class="pengumuman" data-judul="Beasiswa Prestasi Tahun 2026">
+			<h3>Beasiswa Prestasi Tahun 2026</h3>
+			<p>Pendaftaran beasiswa dibuka untuk mahasiswa dengan IPK minimal 3.5.</p>
+			<div class="meta">15 September 2026 &middot; beasiswa</div>
+		</div>
+
+		<div class="pengumuman" data-judul="Perbaikan Fasilitas Perpustakaan">
+			<h3>Perbaikan Fasilitas Perpustakaan</h3>
+			<p>Perpustakaan pusat akan ditutup sementara untuk renovasi ruang baca.</p>
+			<div class="meta">19 Oktober 2026 &middot; fasilitas</div>
+		</div>
+	</div>
+
+	<p class="tidak-ada" id="tidakAda">Tidak ada pengumuman yang cocok dengan pencarian.</p>
+
+	<h2 id="tentang">Tentang aplikasi ini</h2>
+	<p>KampusHub adalah aplikasi papan pengumuman sederhana yang dibuat untuk membantu mahasiswa mendapatkan informasi terbaru dari kampus. Halaman <a href="mahasiswa.html">Mahasiswa</a> berisi pencarian data mahasiswa beserta nilai mata kuliahnya.</p>
+
+</div>
+
+<!-- footer -->
+<div class="footer">
+	Pemrograman Web &middot; 2026 &middot; Nama Mahasiswa / NIM12345
+</div>
+
+<script>
+	const formCari = document.getElementById("formCari");
+	const inputCari = document.getElementById("cariJudul");
+	const infoHasil = document.getElementById("infoHasil");
+	const tidakAda = document.getElementById("tidakAda");
+	const semuaPengumuman = Array.from(document.querySelectorAll(".pengumuman"));
+
+	// Simpan judul asli tiap kartu agar highlight bisa dikembalikan saat pencarian dikosongkan
+	semuaPengumuman.forEach((el) => {
+		const h3 = el.querySelector("h3");
+		el.dataset.judulAsli = h3.textContent;
+	});
+
+	function escapeRegex(teks) {
+		return teks.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	}
+
+	function highlight(teks, kataKunci) {
+		if (!kataKunci) return teks;
+		const regex = new RegExp(`(${escapeRegex(kataKunci)})`, "ig");
+		return teks.replace(regex, "<mark>$1</mark>");
+	}
+
+	function terapkanPencarian() {
+		const kataKunci = inputCari.value.trim();
+		const kataKunciLower = kataKunci.toLowerCase();
+		let jumlahCocok = 0;
+
+		semuaPengumuman.forEach((el) => {
+			const judulAsli = el.dataset.judulAsli;
+			const cocok = judulAsli.toLowerCase().includes(kataKunciLower);
+			const h3 = el.querySelector("h3");
+
+			if (cocok) {
+				el.classList.remove("hidden");
+				h3.innerHTML = highlight(judulAsli, kataKunci);
+				jumlahCocok++;
+			} else {
+				el.classList.add("hidden");
+			}
+		});
+
+		tidakAda.style.display = jumlahCocok === 0 ? "block" : "none";
+
+		infoHasil.textContent =
+			kataKunci === ""
+				? `Menampilkan semua pengumuman (${semuaPengumuman.length})`
+				: `Ditemukan ${jumlahCocok} pengumuman untuk "${kataKunci}"`;
+	}
+
+	// Live search: filter langsung saat mengetik
+	inputCari.addEventListener("input", terapkanPencarian);
+
+	// Tombol "Cari" tetap berfungsi tanpa reload halaman
+	formCari.addEventListener("submit", (e) => {
+		e.preventDefault();
+		terapkanPencarian();
+	});
+
+	// Tampilkan status awal
+	terapkanPencarian();
+</script>
+
+</body>
+</html>
