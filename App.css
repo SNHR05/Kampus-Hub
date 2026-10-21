@@ -1,0 +1,51 @@
+.header{background:#1a3d7c;color:#fff;padding:20px}
+.header h1{margin:0;font-size:22px}
+.header p{margin:5px 0 0;font-size:14px}
+
+/* Menu: sekarang berupa link (NavLink), bukan button */
+.nav{display:flex;flex-wrap:wrap;gap:6px 10px;padding:10px 20px;background:#f0f0f0;border-bottom:1px solid #ccc}
+.nav a{padding:6px 12px;color:#1a3d7c;font-weight:bold;text-decoration:none;border-radius:4px;border-bottom:3px solid transparent}
+.nav a:hover{background:#e1e8f5}
+.nav a.aktif{background:#1a3d7c;color:#fff;border-bottom-color:#0f2552}
+
+.main{max-width:700px;margin:auto;padding:20px}
+.main h2,.pengumuman h3,.mahasiswa h3,.nilai-title{color:#1a3d7c}
+.form-cari{margin-bottom:20px}
+.form-cari input{width:min(250px,70%);padding:6px;border:1px solid #999}
+.form-cari button{padding:6px 15px;border:1px solid #999;cursor:pointer}
+.info-hasil,.meta,.jurusan{color:#777;font-size:13px}
+.info-hasil{margin:-12px 0 15px}
+.pengumuman,.mahasiswa,.detail{background:#fff;border:1px solid #ccc;padding:15px;margin-bottom:15px}
+.pengumuman h3,.mahasiswa h3{margin:0 0 5px}
+.pengumuman p{margin:0 0 10px}
+.mahasiswa{display:block;width:100%;text-align:left;cursor:pointer}
+.mahasiswa:hover{background:#eef2fb}
+.mahasiswa.aktif{background:#dbeafe;border-color:#1a3d7c}
+.tidak-ada{color:#777;font-style:italic}
+.detail{margin-top:25px}
+.detail table,.nilai-table{width:100%;border-collapse:collapse}
+.detail td,.nilai-table th,.nilai-table td{padding:6px 8px;border-bottom:1px solid #eee;text-align:left}
+.detail td:first-child{color:#777;width:35%}
+.nilai-title{margin:18px 0 6px;font-size:15px}
+.nilai-table th{background:#f0f0f0}
+.nilai-table td:last-child{color:#1a3d7c;text-align:center;font-weight:bold}
+
+/* Halaman Berita (API) */
+.sumber{margin:-8px 0 16px}
+.status{padding:12px 15px;margin:0 0 15px;background:#fff;border:1px solid #ccc;color:#444}
+.status.tidak-ada{font-style:normal}
+.status.gagal{background:#fdecec;border-color:#d9534f;color:#8a1f1b}
+.status.gagal p{margin:6px 0 10px}
+.tombol{padding:6px 15px;border:1px solid #8a1f1b;background:#fff;color:#8a1f1b;cursor:pointer}
+.tombol:hover{background:#fbe0e0}
+.mode-uji{padding:6px 10px;margin:0 0 15px;background:#fff8d6;border:1px dashed #b8a200;font-size:13px}
+
+.footer{margin-top:30px;padding:15px 20px;border-top:1px solid #ccc;color:#555;font-size:13px}
+
+/* Layar kecil (360 px): tidak boleh ada geser ke samping */
+@media (max-width:480px){
+  .header,.nav,.main,.footer{padding-left:14px;padding-right:14px}
+  .nav a{padding:6px 10px}
+  .pengumuman h3,.mahasiswa h3{font-size:17px}
+}
+.pengumuman,.mahasiswa,.status,.mode-uji{overflow-wrap:anywhere}
