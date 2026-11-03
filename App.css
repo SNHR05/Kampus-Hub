@@ -45,6 +45,7 @@
 /* Layar kecil (360 px): tidak boleh ada geser ke samping */
 @media (max-width:480px){
   .header,.nav,.main,.footer{padding-left:14px;padding-right:14px}
+  .main{width:1200px}
   .nav a{padding:6px 10px}
   .pengumuman h3,.mahasiswa h3{font-size:17px}
 }

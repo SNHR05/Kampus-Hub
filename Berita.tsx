@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com'
-const ENDPOINT = '/posts' 
+const ENDPOINT = '/post' 
 
 
 const ENDPOINT_UJI: Record<string, string> = {
