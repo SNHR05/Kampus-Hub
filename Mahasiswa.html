@@ -15,7 +15,7 @@
 
 <div class="nav">
 	<a href="index.html">Pengumuman</a>
-	<a href="mahasiswa.html" class="aktif">Mahasiswa</a>
+	<a href="mahasiswas.html" class="aktif">Mahasiswa</a>
 	<a href="index.html#tentang">Tentang</a>
 </div>
 
@@ -150,7 +150,7 @@
 
 		daftarMahasiswa.innerHTML = "";
 
-		hasil.forEach((mhs) => {
+		mahasiswa.forEach((mhs) => {
 			const div = document.createElement("div");
 			div.className = "mahasiswa" + (mhs.nim === nimAktif ? " aktif" : "");
 			div.innerHTML = `

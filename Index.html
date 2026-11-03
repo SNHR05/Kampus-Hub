@@ -17,7 +17,7 @@
 
 <div class="nav">
 	<a href="index.html" class="aktif">Pengumuman</a>
-	<a href="mahasiswa.html">Mahasiswa</a>
+	<a href="mahasiswas.html">Mahasiswa</a>
 	<a href="#tentang">Tentang</a>
 </div>
 
@@ -58,7 +58,7 @@
 	<p class="tidak-ada" id="tidakAda">Tidak ada pengumuman yang cocok dengan pencarian.</p>
 
 	<h2 id="tentang">Tentang aplikasi ini</h2>
-	<p>KampusHub adalah aplikasi papan pengumuman sederhana yang dibuat untuk membantu mahasiswa mendapatkan informasi terbaru dari kampus. Halaman <a href="mahasiswa.html">Mahasiswa</a> berisi pencarian data mahasiswa beserta nilai mata kuliahnya.</p>
+	<p>KampusHub adalah aplikasi papan pengumuman sederhana yang dibuat untuk membantu mahasiswa mendapatkan informasi terbaru dari kampus. Halaman <a href="mahasiswas.html">Mahasiswa</a> berisi pencarian data mahasiswa beserta nilai mata kuliahnya.</p>
 
 </div>
 
@@ -105,7 +105,7 @@
 				h3.innerHTML = highlight(judulAsli, kataKunci);
 				jumlahCocok++;
 			} else {
-				el.classList.add("hidden");
+				el.classList.remove("hidden");
 			}
 		});
 
